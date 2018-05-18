@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4BF32FCA-C335-444F-B00A-632885DF5D79}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Sub Main</StartupObject>
+    <RootNamespace>PHADS</RootNamespace>
+    <AssemblyName>PHADS</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>PHADS.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>PHADS.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.10.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Clases\Conexion.vb" />
+    <Compile Include="Clases\Usuario.vb" />
+    <Compile Include="FmrMain.designer.vb">
+      <DependentUpon>FmrMain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FmrMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FmrCambioPass.designer.vb">
+      <DependentUpon>FmrCambioPass.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FmrCambioPass.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FmrConsultas.designer.vb">
+      <DependentUpon>FmrConsultas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FmrConsultas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FmrGestionUsuario.Designer.vb">
+      <DependentUpon>FmrGestionUsuario.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FmrGestionUsuario.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FmrPuestos.Designer.vb">
+      <DependentUpon>FmrPuestos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FmrPuestos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Login.Designer.vb">
+      <DependentUpon>Login.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Legado\GestionAlta.designer.vb">
+      <DependentUpon>GestionAlta.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Legado\GestionAlta.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Legado\GestionBaja.Designer.vb">
+      <DependentUpon>GestionBaja.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Legado\GestionBaja.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Legado\GestionModificacion.Designer.vb">
+      <DependentUpon>GestionModificacion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Legado\GestionModificacion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainModule.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FmrMain.resx">
+      <DependentUpon>FmrMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FmrCambioPass.resx">
+      <DependentUpon>FmrCambioPass.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FmrConsultas.resx">
+      <DependentUpon>FmrConsultas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FmrGestionUsuario.resx">
+      <DependentUpon>FmrGestionUsuario.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FmrPuestos.resx">
+      <DependentUpon>FmrPuestos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Login.resx">
+      <DependentUpon>Login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Legado\GestionAlta.resx">
+      <DependentUpon>GestionAlta.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Legado\GestionBaja.resx">
+      <DependentUpon>GestionBaja.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Legado\GestionModificacion.resx">
+      <DependentUpon>GestionModificacion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+</Project>
