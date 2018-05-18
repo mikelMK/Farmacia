@@ -33,7 +33,7 @@ Partial Class FmrGestionUsuario
         Me.ChkVentas = New System.Windows.Forms.CheckBox()
         Me.ChkUsuarios = New System.Windows.Forms.CheckBox()
         Me.ChkControlTotal = New System.Windows.Forms.CheckBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.CboPuesto = New System.Windows.Forms.ComboBox()
         Me.txtCodPostal = New System.Windows.Forms.TextBox()
         Me.txtLocalidad = New System.Windows.Forms.TextBox()
         Me.txtProvincia = New System.Windows.Forms.TextBox()
@@ -54,8 +54,8 @@ Partial Class FmrGestionUsuario
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.GrpDatosPersonales = New System.Windows.Forms.GroupBox()
-        Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.DtpAlta = New System.Windows.Forms.DateTimePicker()
+        Me.DtpNacimiento = New System.Windows.Forms.DateTimePicker()
         Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.txtApellido2 = New System.Windows.Forms.TextBox()
         Me.txtApellido1 = New System.Windows.Forms.TextBox()
@@ -71,10 +71,12 @@ Partial Class FmrGestionUsuario
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GrpPuesto = New System.Windows.Forms.GroupBox()
-        Me.GrpPermisos = New System.Windows.Forms.GroupBox()
-        Me.GrpDireccion = New System.Windows.Forms.GroupBox()
-        Me.Label19 = New System.Windows.Forms.Label()
         Me.SudSalario = New System.Windows.Forms.NumericUpDown()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.GrpPermisos = New System.Windows.Forms.GroupBox()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.TxtNVia = New System.Windows.Forms.TextBox()
+        Me.GrpDireccion = New System.Windows.Forms.GroupBox()
         Me.BtnNewUser = New System.Windows.Forms.Button()
         Me.BtnGuardar = New System.Windows.Forms.Button()
         Me.BtnCancelar = New System.Windows.Forms.Button()
@@ -84,9 +86,9 @@ Partial Class FmrGestionUsuario
         Me.BtnModificar = New System.Windows.Forms.Button()
         Me.GrpDatosPersonales.SuspendLayout()
         Me.GrpPuesto.SuspendLayout()
+        CType(Me.SudSalario, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GrpPermisos.SuspendLayout()
         Me.GrpDireccion.SuspendLayout()
-        CType(Me.SudSalario, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LtsEmpleados
@@ -189,13 +191,13 @@ Partial Class FmrGestionUsuario
         Me.ChkControlTotal.Text = "Control Total"
         Me.ChkControlTotal.UseVisualStyleBackColor = True
         '
-        'ComboBox1
+        'CboPuesto
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(312, 29)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(137, 21)
-        Me.ComboBox1.TabIndex = 94
+        Me.CboPuesto.FormattingEnabled = True
+        Me.CboPuesto.Location = New System.Drawing.Point(312, 29)
+        Me.CboPuesto.Name = "CboPuesto"
+        Me.CboPuesto.Size = New System.Drawing.Size(137, 21)
+        Me.CboPuesto.TabIndex = 94
         '
         'txtCodPostal
         '
@@ -220,21 +222,21 @@ Partial Class FmrGestionUsuario
         '
         'txtPuerta
         '
-        Me.txtPuerta.Location = New System.Drawing.Point(279, 49)
+        Me.txtPuerta.Location = New System.Drawing.Point(386, 49)
         Me.txtPuerta.Name = "txtPuerta"
         Me.txtPuerta.Size = New System.Drawing.Size(55, 20)
         Me.txtPuerta.TabIndex = 90
         '
         'txtPiso
         '
-        Me.txtPiso.Location = New System.Drawing.Point(163, 49)
+        Me.txtPiso.Location = New System.Drawing.Point(279, 49)
         Me.txtPiso.Name = "txtPiso"
         Me.txtPiso.Size = New System.Drawing.Size(55, 20)
         Me.txtPiso.TabIndex = 89
         '
         'txtPortal
         '
-        Me.txtPortal.Location = New System.Drawing.Point(81, 49)
+        Me.txtPortal.Location = New System.Drawing.Point(181, 49)
         Me.txtPortal.Name = "txtPortal"
         Me.txtPortal.Size = New System.Drawing.Size(39, 20)
         Me.txtPortal.TabIndex = 88
@@ -290,7 +292,7 @@ Partial Class FmrGestionUsuario
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(224, 52)
+        Me.Label15.Location = New System.Drawing.Point(342, 52)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(38, 13)
         Me.Label15.TabIndex = 74
@@ -299,7 +301,7 @@ Partial Class FmrGestionUsuario
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(130, 52)
+        Me.Label14.Location = New System.Drawing.Point(240, 52)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(27, 13)
         Me.Label14.TabIndex = 73
@@ -308,7 +310,7 @@ Partial Class FmrGestionUsuario
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(14, 52)
+        Me.Label13.Location = New System.Drawing.Point(141, 52)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(34, 13)
         Me.Label13.TabIndex = 72
@@ -352,8 +354,8 @@ Partial Class FmrGestionUsuario
         '
         'GrpDatosPersonales
         '
-        Me.GrpDatosPersonales.Controls.Add(Me.DateTimePicker2)
-        Me.GrpDatosPersonales.Controls.Add(Me.DateTimePicker1)
+        Me.GrpDatosPersonales.Controls.Add(Me.DtpAlta)
+        Me.GrpDatosPersonales.Controls.Add(Me.DtpNacimiento)
         Me.GrpDatosPersonales.Controls.Add(Me.txtEmail)
         Me.GrpDatosPersonales.Controls.Add(Me.txtApellido2)
         Me.GrpDatosPersonales.Controls.Add(Me.txtApellido1)
@@ -375,19 +377,19 @@ Partial Class FmrGestionUsuario
         Me.GrpDatosPersonales.TabStop = False
         Me.GrpDatosPersonales.Text = "Datos Personales"
         '
-        'DateTimePicker2
+        'DtpAlta
         '
-        Me.DateTimePicker2.Location = New System.Drawing.Point(82, 133)
-        Me.DateTimePicker2.Name = "DateTimePicker2"
-        Me.DateTimePicker2.Size = New System.Drawing.Size(219, 20)
-        Me.DateTimePicker2.TabIndex = 122
+        Me.DtpAlta.Location = New System.Drawing.Point(82, 133)
+        Me.DtpAlta.Name = "DtpAlta"
+        Me.DtpAlta.Size = New System.Drawing.Size(219, 20)
+        Me.DtpAlta.TabIndex = 122
         '
-        'DateTimePicker1
+        'DtpNacimiento
         '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(386, 133)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(217, 20)
-        Me.DateTimePicker1.TabIndex = 121
+        Me.DtpNacimiento.Location = New System.Drawing.Point(386, 133)
+        Me.DtpNacimiento.Name = "DtpNacimiento"
+        Me.DtpNacimiento.Size = New System.Drawing.Size(217, 20)
+        Me.DtpNacimiento.TabIndex = 121
         '
         'txtEmail
         '
@@ -421,6 +423,7 @@ Partial Class FmrGestionUsuario
         '
         Me.txtContraseña.Location = New System.Drawing.Point(386, 29)
         Me.txtContraseña.Name = "txtContraseña"
+        Me.txtContraseña.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtContraseña.Size = New System.Drawing.Size(217, 20)
         Me.txtContraseña.TabIndex = 116
         '
@@ -508,7 +511,7 @@ Partial Class FmrGestionUsuario
         '
         Me.GrpPuesto.Controls.Add(Me.SudSalario)
         Me.GrpPuesto.Controls.Add(Me.Label19)
-        Me.GrpPuesto.Controls.Add(Me.ComboBox1)
+        Me.GrpPuesto.Controls.Add(Me.CboPuesto)
         Me.GrpPuesto.Controls.Add(Me.txtIdFarmacia)
         Me.GrpPuesto.Controls.Add(Me.Label10)
         Me.GrpPuesto.Controls.Add(Me.Label9)
@@ -518,6 +521,23 @@ Partial Class FmrGestionUsuario
         Me.GrpPuesto.TabIndex = 110
         Me.GrpPuesto.TabStop = False
         Me.GrpPuesto.Text = "Puesto"
+        '
+        'SudSalario
+        '
+        Me.SudSalario.Location = New System.Drawing.Point(500, 29)
+        Me.SudSalario.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.SudSalario.Name = "SudSalario"
+        Me.SudSalario.Size = New System.Drawing.Size(103, 20)
+        Me.SudSalario.TabIndex = 97
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(455, 32)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(39, 13)
+        Me.Label19.TabIndex = 95
+        Me.Label19.Text = "Salario"
         '
         'GrpPermisos
         '
@@ -533,8 +553,26 @@ Partial Class FmrGestionUsuario
         Me.GrpPermisos.TabStop = False
         Me.GrpPermisos.Text = "Permisos"
         '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(14, 52)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(44, 13)
+        Me.Label20.TabIndex = 106
+        Me.Label20.Text = "Numero"
+        '
+        'TxtNVia
+        '
+        Me.TxtNVia.Location = New System.Drawing.Point(81, 49)
+        Me.TxtNVia.Name = "TxtNVia"
+        Me.TxtNVia.Size = New System.Drawing.Size(39, 20)
+        Me.TxtNVia.TabIndex = 105
+        '
         'GrpDireccion
         '
+        Me.GrpDireccion.Controls.Add(Me.Label20)
+        Me.GrpDireccion.Controls.Add(Me.TxtNVia)
         Me.GrpDireccion.Controls.Add(Me.Label23)
         Me.GrpDireccion.Controls.Add(Me.ComboBoxTipoVia)
         Me.GrpDireccion.Controls.Add(Me.txtVia)
@@ -559,23 +597,6 @@ Partial Class FmrGestionUsuario
         Me.GrpDireccion.TabIndex = 112
         Me.GrpDireccion.TabStop = False
         Me.GrpDireccion.Text = "Direccion"
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(455, 32)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(39, 13)
-        Me.Label19.TabIndex = 95
-        Me.Label19.Text = "Salario"
-        '
-        'SudSalario
-        '
-        Me.SudSalario.Location = New System.Drawing.Point(500, 29)
-        Me.SudSalario.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
-        Me.SudSalario.Name = "SudSalario"
-        Me.SudSalario.Size = New System.Drawing.Size(103, 20)
-        Me.SudSalario.TabIndex = 97
         '
         'BtnNewUser
         '
@@ -619,7 +640,7 @@ Partial Class FmrGestionUsuario
         Me.TxtDNIBusqueda.Name = "TxtDNIBusqueda"
         Me.TxtDNIBusqueda.Size = New System.Drawing.Size(158, 20)
         Me.TxtDNIBusqueda.TabIndex = 117
-        Me.TxtDNIBusqueda.Text = "*"
+        Me.TxtDNIBusqueda.Text = "%"
         '
         'BtnBuscar
         '
@@ -666,11 +687,11 @@ Partial Class FmrGestionUsuario
         Me.GrpDatosPersonales.PerformLayout()
         Me.GrpPuesto.ResumeLayout(False)
         Me.GrpPuesto.PerformLayout()
+        CType(Me.SudSalario, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GrpPermisos.ResumeLayout(False)
         Me.GrpPermisos.PerformLayout()
         Me.GrpDireccion.ResumeLayout(False)
         Me.GrpDireccion.PerformLayout()
-        CType(Me.SudSalario, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -687,7 +708,7 @@ Partial Class FmrGestionUsuario
     Friend WithEvents ChkVentas As CheckBox
     Friend WithEvents ChkUsuarios As CheckBox
     Friend WithEvents ChkControlTotal As CheckBox
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents CboPuesto As ComboBox
     Friend WithEvents txtCodPostal As TextBox
     Friend WithEvents txtLocalidad As TextBox
     Friend WithEvents txtProvincia As TextBox
@@ -708,8 +729,8 @@ Partial Class FmrGestionUsuario
     Friend WithEvents Label10 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents GrpDatosPersonales As GroupBox
-    Friend WithEvents DateTimePicker2 As DateTimePicker
-    Friend WithEvents DateTimePicker1 As DateTimePicker
+    Friend WithEvents DtpAlta As DateTimePicker
+    Friend WithEvents DtpNacimiento As DateTimePicker
     Friend WithEvents txtEmail As TextBox
     Friend WithEvents txtApellido2 As TextBox
     Friend WithEvents txtApellido1 As TextBox
@@ -736,4 +757,6 @@ Partial Class FmrGestionUsuario
     Friend WithEvents TxtDNIBusqueda As TextBox
     Friend WithEvents BtnBuscar As Button
     Friend WithEvents BtnModificar As Button
+    Friend WithEvents TxtNVia As TextBox
+    Friend WithEvents Label20 As Label
 End Class

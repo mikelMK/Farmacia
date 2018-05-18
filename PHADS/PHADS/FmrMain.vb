@@ -8,6 +8,9 @@ Public Class FmrMain
     Private Login As Login
     Private MiConexion As Conexion
     Private Usuario As Usuario
+    Private _FmrGestionUsuarios As FmrGestionUsuario
+
+
 
     Public Sub New(pConecxion As Conexion, pUsuario As Usuario)
         ' Esta llamada es exigida por el diseñador.
@@ -43,5 +46,10 @@ Public Class FmrMain
     Private Sub GeneradorConsultasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MsGeneradorConsultas.Click
         GeneradorConsultas = New FmrConsultas(MiConexion)
         GeneradorConsultas.Show()
+    End Sub
+
+    Private Sub MsiUsuarios_Click(sender As Object, e As EventArgs) Handles MsiUsuarios.Click
+        _FmrGestionUsuarios = New FmrGestionUsuario(MiConexion)
+        _FmrGestionUsuarios.Show()
     End Sub
 End Class

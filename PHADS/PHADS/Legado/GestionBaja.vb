@@ -1,4 +1,4 @@
-﻿Imports ProyectoV1.Conexion
+﻿Imports PHADS.Conexion
 
 Public Class GestionBaja
     Private MiConexion As Conexion

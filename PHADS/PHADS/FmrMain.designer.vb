@@ -61,7 +61,7 @@ Partial Class FmrMain
         'MsiVentas
         '
         Me.MsiVentas.Name = "MsiVentas"
-        Me.MsiVentas.Size = New System.Drawing.Size(180, 22)
+        Me.MsiVentas.Size = New System.Drawing.Size(163, 22)
         Me.MsiVentas.Text = "Venta de producto"
         '
         'MsAlmacen
@@ -74,7 +74,7 @@ Partial Class FmrMain
         'MsiAlmacen
         '
         Me.MsiAlmacen.Name = "MsiAlmacen"
-        Me.MsiAlmacen.Size = New System.Drawing.Size(180, 22)
+        Me.MsiAlmacen.Size = New System.Drawing.Size(168, 22)
         Me.MsiAlmacen.Text = "Gestion de Almacen"
         '
         'MsCompras
@@ -87,19 +87,19 @@ Partial Class FmrMain
         'MsiProductos
         '
         Me.MsiProductos.Name = "MsiProductos"
-        Me.MsiProductos.Size = New System.Drawing.Size(180, 22)
+        Me.MsiProductos.Size = New System.Drawing.Size(135, 22)
         Me.MsiProductos.Text = "Productos"
         '
         'MsiPedidos
         '
         Me.MsiPedidos.Name = "MsiPedidos"
-        Me.MsiPedidos.Size = New System.Drawing.Size(180, 22)
+        Me.MsiPedidos.Size = New System.Drawing.Size(135, 22)
         Me.MsiPedidos.Text = "Pedidos"
         '
         'MsiProveedores
         '
         Me.MsiProveedores.Name = "MsiProveedores"
-        Me.MsiProveedores.Size = New System.Drawing.Size(180, 22)
+        Me.MsiProveedores.Size = New System.Drawing.Size(135, 22)
         Me.MsiProveedores.Text = "Proveedores"
         '
         'MsUsuarios

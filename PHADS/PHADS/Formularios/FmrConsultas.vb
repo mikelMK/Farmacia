@@ -1,4 +1,4 @@
-﻿Imports ProyectoV1.Conexion
+﻿Imports PHADS.Conexion
 Public Class FmrConsultas
     Private MiConexion As Conexion
     Private Campos As DataTable

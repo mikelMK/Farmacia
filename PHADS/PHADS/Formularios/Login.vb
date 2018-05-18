@@ -36,7 +36,7 @@ Public Class Login
     End Sub
 
     Private Sub BtnDebug_Click(sender As Object, e As EventArgs) Handles BtnDebug.Click
-        TxtDNI.Text = "01234567A"
-        TxtPass.Text = "Contra"
+        TxtDNI.Text = "00000000A"
+        TxtPass.Text = "Tere"
     End Sub
 End Class

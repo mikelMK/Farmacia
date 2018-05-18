@@ -20,9 +20,9 @@
         sNombre = Usuario(2)
         sApell_1 = Usuario(3)
         sApell_2 = Usuario(4)
-        sEmail = Usuario(5)
-        sFecha_Nac = Usuario(6)
-        sFecha_Alta = Usuario(7)
+        sEmail = Usuario(5).ToString()
+        sFecha_Nac = Usuario(6).ToString()
+        sFecha_Alta = Usuario(7).ToString()
         sPuesto = Usuario(8)
         If Usuario(21) = 1 Then
             bControl_Total = True
