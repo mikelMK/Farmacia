@@ -10,6 +10,15 @@ Public Class Login
         MiConexion = pConexion
     End Sub
 
+    Public ReadOnly Property Usuario
+        Get
+            Return MiUsuario
+        End Get
+    End Property
+
+
+
+
     Private Sub BtnLoguin_Click(sender As Object, e As EventArgs) Handles BtnLoguin.Click
         Dim Sele As String
         Sele = "Select * From Empleados where DNI='" & TxtDNI.Text & "' And Contrasena='" & TxtPass.Text & "'"
@@ -18,11 +27,7 @@ Public Class Login
         BtnLoguin.Enabled = True
         If tabla IsNot Nothing Then
             MessageBox.Show("Usuario valido")
-            MiUsuario = New Usuario(tabla(0))
-            MaceWindu = New FmrMain(MiConexion, MiUsuario)
-            MaceWindu.Show()
-            Me.Enabled = False
-            Me.Visible = False
+            Me.Close()
         Else
             MessageBox.Show("Usuario o Contraseña Incorrecta")
         End If

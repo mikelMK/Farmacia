@@ -19,6 +19,15 @@ Public Class FmrMain
         Usuario = pUsuario
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
     End Sub
+    Public Sub New(pConecxion As Conexion)
+        ' Esta llamada es exigida por el diseñador.
+        InitializeComponent()
+        MiConexion = pConecxion
+        Login = New Login(MiConexion)
+        Login.ShowDialog()
+        Usuario = Login.Usuario
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+    End Sub
 
     Private Sub FmrMain_Closed(sender As Object, e As EventArgs) Handles Me.Closed
         Application.Exit()
