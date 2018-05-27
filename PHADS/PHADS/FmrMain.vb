@@ -17,6 +17,7 @@ Public Class FmrMain
         InitializeComponent()
         MiConexion = pConecxion
         Usuario = pUsuario
+        MessageBox.Show(Usuario.ToString())
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
     End Sub
     Public Sub New(pConecxion As Conexion)

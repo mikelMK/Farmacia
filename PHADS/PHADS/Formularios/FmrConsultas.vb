@@ -384,4 +384,9 @@ Public Class FmrConsultas
         TxtComparacion.Text = "0"
     End Sub
 
+    Private Sub DgvPrincipal_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvPrincipal.CellClick
+        Dim Obj As Object = DgvPrincipal.CurrentCell.Value
+        MessageBox.Show(Obj.ToString)
+        MessageBox.Show(Obj.GetType.ToString)
+    End Sub
 End Class

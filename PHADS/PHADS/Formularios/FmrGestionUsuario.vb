@@ -1,8 +1,13 @@
 ﻿Imports PHADS.Conexion
+Imports PHADS.Usuario
+Imports PHADS.TipoVia
 Public Class FmrGestionUsuario
     Private MiConexion As Conexion
     Private Estado As Integer = 0
-    Dim MiTabla As DataTable
+    Dim MisEmpleados As List(Of Usuario) = New List(Of Usuario)
+    Dim ListaVias As List(Of TipoVia) = New List(Of TipoVia)
+    Dim EmpleadoMostrado As Usuario = New Usuario()
+
     Public Sub New(pConexion As Conexion)
 
         ' Esta llamada es exigida por el diseñador.
@@ -11,20 +16,26 @@ Public Class FmrGestionUsuario
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
     End Sub
     Private Sub ActualizarDatos()
-        MiTabla = MiConexion.Consultar("Select * from Empleados")
+        Dim MiTabla As DataTable = MiConexion.Consultar("Select * from Empleados")
+        MisEmpleados.Clear()
+        For Each Mirow As DataRow In MiTabla.Rows
+            MisEmpleados.Add(New Usuario(Mirow))
+        Next
+        MiTabla = MiConexion.Consultar("Select * from Tipo_Via")
+        ListaVias.Clear()
+        For Each Mirow As DataRow In MiTabla.Rows
+            ListaVias.Add(New TipoVia(Mirow))
+        Next
     End Sub
-
 
     Private Sub CargarListaEmpleados(DNI As String)
         Me.ActualizarDatos()
-        LtsEmpleados.Items.Clear()
-        'For Each MiRow As DataRow In MiTabla.Rows
-        '    LtsEmpleados.Items.Add(MiRow(0) & " - " & MiRow(1) & " " & MiRow(2) & " " & MiRow(3))
-        'Next
-        LtsEmpleados.DataSource = MiTabla
-        LtsEmpleados.DisplayMember = MiTabla.Columns(0).ColumnName
-        LtsEmpleados.ValueMember = MiTabla.Columns(0).ColumnName
+        LtsEmpleados.DataSource = MisEmpleados
+        LtsEmpleados.DisplayMember = "DNI"
         LtsEmpleados.SelectedIndex = 0
+
+        CboPuesto.DataSource = ListaVias
+        CboPuesto.DisplayMember = "Despcripcion"
     End Sub
     Private Sub Estado_Consulta()
         Estado = 0
@@ -70,6 +81,7 @@ Public Class FmrGestionUsuario
     Private Sub FmrGestionUsuario_Load(sender As Object, e As EventArgs) Handles Me.Load
         CargarListaEmpleados(TxtDNIBusqueda.Text)
         Me.Estado_Consulta()
+        LtsEmpleados.SelectedItem = -1
     End Sub
 
     Private Sub BtnRecargarEmpleados_Click(sender As Object, e As EventArgs) Handles BtnRecargarEmpleados.Click
@@ -79,65 +91,42 @@ Public Class FmrGestionUsuario
 
     Private Sub LtsEmpleados_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LtsEmpleados.SelectedIndexChanged
         Me.ActualizarDatos()
-        txtDni.Text = MiTabla(LtsEmpleados.SelectedIndex).Item(0)
-        txtContraseña.Text = MiTabla(LtsEmpleados.SelectedIndex).Item(1)
-        txtNombre.Text = MiTabla(LtsEmpleados.SelectedIndex).Item(2)
-        txtApellido1.Text = MiTabla(LtsEmpleados.SelectedIndex).Item(3)
-        txtApellido2.Text = MiTabla(LtsEmpleados.SelectedIndex).Item(4)
-        txtEmail.Text = MiTabla(LtsEmpleados.SelectedIndex).Item(5)
-        Try
-            DtpNacimiento.Value = MiTabla(LtsEmpleados.SelectedIndex).Item(6)
-        Catch ex As Exception
-            'DtpNacimiento.Value = Nothing
-        End Try
-        Try
-            DtpAlta.Value = MiTabla(LtsEmpleados.SelectedIndex).Item(7).ToString()
-        Catch ex As Exception
-            'DtpAlta.Value = Nothing
-        End Try
-        txtIdFarmacia.Text = MiTabla(LtsEmpleados.SelectedIndex).Item(8)
-        'CboPuesto.SelectedIndex = Integer.Parse(MiTabla(LtsEmpleados.SelectedIndex).Item(9))
-        SudSalario.Value = MiTabla(LtsEmpleados.SelectedIndex).Item(10)
-        'ComboBoxTipoVia.SelectedIndex = Integer.Parse(MiTabla(LtsEmpleados.SelectedIndex).Item(11))
-        txtVia.Text = MiTabla(LtsEmpleados.SelectedIndex).Item(12)
-        TxtNVia.Text = MiTabla(LtsEmpleados.SelectedIndex).Item(13)
-        txtPortal.Text = MiTabla(LtsEmpleados.SelectedIndex).Item(14)
-        txtPiso.Text = MiTabla(LtsEmpleados.SelectedIndex).Item(15)
-        txtPuerta.Text = MiTabla(LtsEmpleados.SelectedIndex).Item(16)
-        txtCodPostal.Text = MiTabla(LtsEmpleados.SelectedIndex).Item(17)
-        txtPais.Text = MiTabla(LtsEmpleados.SelectedIndex).Item(18)
-        txtProvincia.Text = MiTabla(LtsEmpleados.SelectedIndex).Item(19)
-        txtLocalidad.Text = MiTabla(LtsEmpleados.SelectedIndex).Item(20)
-
-        If MiTabla(LtsEmpleados.SelectedIndex).Item(21) = 1 Then
-            ChkControlTotal.Checked = True
+        EmpleadoMostrado = LtsEmpleados.SelectedItem
+        txtDni.Text = EmpleadoMostrado.DNI
+        txtContraseña.Text = EmpleadoMostrado.Password
+        txtNombre.Text = EmpleadoMostrado.Nombre
+        txtApellido1.Text = EmpleadoMostrado.Apell_1
+        txtApellido2.Text = EmpleadoMostrado.Apell_2
+        txtEmail.Text = EmpleadoMostrado.Email
+        If EmpleadoMostrado.Fecha_Alta = Nothing Then
+            DtpAlta.Value = Today
         Else
-            ChkControlTotal.Checked = False
+            DtpAlta.Value = EmpleadoMostrado.Fecha_Alta
         End If
-
-        If MiTabla(LtsEmpleados.SelectedIndex).Item(21) = 1 Then
-            ChkVentas.Checked = True
+        If EmpleadoMostrado.Fecha_Nac = Nothing Then
+            DtpNacimiento.Value = Today
         Else
-            ChkVentas.Checked = False
+            DtpNacimiento.Value = EmpleadoMostrado.Fecha_Nac
         End If
+        txtIdFarmacia.Text = EmpleadoMostrado.Farmacia
+        'CboPuesto.SelectedIndex = Integer.Parse(EmpleadoMostrado(9))
+        SudSalario.Value = EmpleadoMostrado.Salario
+        'ComboBoxTipoVia.SelectedIndex = EmpleadoMostrado.TipoVia
+        txtVia.Text = EmpleadoMostrado.NombreVia
+        TxtNVia.Text = EmpleadoMostrado.NoVia
+        txtPortal.Text = EmpleadoMostrado.NoPortal
+        txtPiso.Text = EmpleadoMostrado.Piso
+        txtPuerta.Text = EmpleadoMostrado.Puerta
+        txtCodPostal.Text = EmpleadoMostrado.CodPostal
+        txtPais.Text = EmpleadoMostrado.Pais
+        txtProvincia.Text = EmpleadoMostrado.Provinca
+        txtLocalidad.Text = EmpleadoMostrado.Localidad
 
-        If MiTabla(LtsEmpleados.SelectedIndex).Item(21) = 1 Then
-            ChkAlmacen.Checked = True
-        Else
-            ChkAlmacen.Checked = False
-        End If
-
-        If MiTabla(LtsEmpleados.SelectedIndex).Item(21) = 1 Then
-            ChkCompras.Checked = True
-        Else
-            ChkAlmacen.Checked = False
-        End If
-
-        If MiTabla(LtsEmpleados.SelectedIndex).Item(21) = 1 Then
-            ChkUsuarios.Checked = True
-        Else
-            ChkUsuarios.Checked = False
-        End If
+        ChkControlTotal.Checked = EmpleadoMostrado.Control_Total
+        ChkVentas.Checked = EmpleadoMostrado.Ventas
+        ChkCompras.Checked = EmpleadoMostrado.Compras
+        ChkAlmacen.Checked = EmpleadoMostrado.Almacen
+        ChkUsuarios.Checked = EmpleadoMostrado.Usuarios
 
     End Sub
 
