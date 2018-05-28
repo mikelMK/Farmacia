@@ -2,96 +2,109 @@
 Imports PHADS.Usuario
 Imports PHADS.TipoVia
 Public Class FmrGestionUsuario
+#Region "Variables"
     Private MiConexion As Conexion
     Private Estado As Integer = 0
     Dim MisEmpleados As List(Of Usuario) = New List(Of Usuario)
     Dim ListaVias As List(Of TipoVia) = New List(Of TipoVia)
     Dim EmpleadoMostrado As Usuario = New Usuario()
-
+#End Region
+#Region "Constructores"
     Public Sub New(pConexion As Conexion)
-
         ' Esta llamada es exigida por el diseñador.
         InitializeComponent()
         MiConexion = pConexion
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
     End Sub
-    Private Sub ActualizarDatos()
-        Dim MiTabla As DataTable = MiConexion.Consultar("Select * from Empleados")
-        MisEmpleados.Clear()
-        For Each Mirow As DataRow In MiTabla.Rows
-            MisEmpleados.Add(New Usuario(Mirow))
-        Next
-        MiTabla = MiConexion.Consultar("Select * from Tipo_Via")
-        ListaVias.Clear()
-        For Each Mirow As DataRow In MiTabla.Rows
-            ListaVias.Add(New TipoVia(Mirow))
-        Next
-    End Sub
-
-    Private Sub CargarListaEmpleados(DNI As String)
-        Me.ActualizarDatos()
-        LtsEmpleados.DataSource = MisEmpleados
-        LtsEmpleados.DisplayMember = "DNI"
-        LtsEmpleados.SelectedIndex = 0
-
-        CboPuesto.DataSource = ListaVias
-        CboPuesto.DisplayMember = "Despcripcion"
-    End Sub
-    Private Sub Estado_Consulta()
-        Estado = 0
-        GrpDatosPersonales.Enabled = False
-        GrpDireccion.Enabled = False
-        GrpPermisos.Enabled = False
-        GrpPuesto.Enabled = False
-        BtnBuscar.Enabled = True
-        BtnNewUser.Enabled = True
-        BtnEliminar.Enabled = True
-        BtnModificar.Enabled = True
-        BtnGuardar.Enabled = False
-        BtnCancelar.Enabled = False
-    End Sub
-    Private Sub Estado_Insert()
-        Estado = 1
-        GrpDatosPersonales.Enabled = True
-        GrpDireccion.Enabled = True
-        GrpPermisos.Enabled = True
-        GrpPuesto.Enabled = True
-        BtnBuscar.Enabled = False
-        BtnNewUser.Enabled = False
-        BtnModificar.Enabled = False
-        BtnEliminar.Enabled = False
-        BtnGuardar.Enabled = True
-        BtnCancelar.Enabled = True
-    End Sub
-    Private Sub Estado_Modificacion()
-        Estado = 2
-        GrpDatosPersonales.Enabled = True
-        GrpDireccion.Enabled = True
-        GrpPermisos.Enabled = True
-        GrpPuesto.Enabled = True
-        BtnBuscar.Enabled = False
-        BtnNewUser.Enabled = False
-        BtnModificar.Enabled = False
-        BtnEliminar.Enabled = False
-        BtnGuardar.Enabled = True
-        BtnCancelar.Enabled = True
-        txtDni.Enabled = False
-    End Sub
-
+#End Region
+#Region "Manejadores"
+#Region "Load"
     Private Sub FmrGestionUsuario_Load(sender As Object, e As EventArgs) Handles Me.Load
-        CargarListaEmpleados(TxtDNIBusqueda.Text)
+        CargarListaEmpleados()
         Me.Estado_Consulta()
-        LtsEmpleados.SelectedItem = -1
     End Sub
+#End Region
 
+#Region "Botones"
     Private Sub BtnRecargarEmpleados_Click(sender As Object, e As EventArgs) Handles BtnRecargarEmpleados.Click
-        TxtDNIBusqueda.Text = "%"
         Me.ActualizarDatos()
     End Sub
 
+    Private Sub BtnNewUser_Click(sender As Object, e As EventArgs) Handles BtnNewUser.Click
+        LtsEmpleados.SelectedIndex = -1
+        Me.Estado_Insert()
+        Carga()
+    End Sub
+
+    Private Sub BtnModificar_Click(sender As Object, e As EventArgs) Handles BtnModificar.Click
+        If LtsEmpleados.SelectedIndex <> -1 Then
+            Me.Estado_Modificacion()
+        Else
+            MessageBox.Show("Selecione un empleado")
+        End If
+    End Sub
+
+    Private Sub BtnEliminar_Click(sender As Object, e As EventArgs) Handles BtnEliminar.Click
+        If LtsEmpleados.SelectedIndex <> -1 Then
+            If MessageBox.Show("Desea eliminar a " & EmpleadoMostrado.Nombre & " " & EmpleadoMostrado.Apell_1 & " " & EmpleadoMostrado.Apell_2, "Eliminar", MessageBoxButtons.YesNo) Then
+                If MiConexion.Delete(EmpleadoMostrado.SqlDelete) Then
+                    MessageBox.Show("Empleado eliminado")
+                Else
+                    MessageBox.Show("Error al eliminar empleado")
+                End If
+            End If
+            Me.ActualizarDatos()
+            LtsEmpleados.SelectedIndex = -1
+        Else
+            MessageBox.Show("Selecione un empleado")
+        End If
+    End Sub
+
+    Private Sub BtnCancelar_Click(sender As Object, e As EventArgs) Handles BtnCancelar.Click
+        Me.Estado_Consulta()
+        LtsEmpleados.SelectedIndex = -1
+    End Sub
+
+    Private Sub BtnGuardar_Click(sender As Object, e As EventArgs) Handles BtnGuardar.Click
+        descarga()
+        Select Case Estado
+            Case 1
+                Dim sql As String = EmpleadoMostrado.SqlInsert
+                MessageBox.Show(sql)
+                If MiConexion.Insetrar(sql) Then
+                    MessageBox.Show("Empleado creado")
+                    Me.ActualizarDatos()
+                    Me.Estado_Consulta()
+                Else
+                    MessageBox.Show("Error al crear empleado")
+                End If
+            Case 2
+                Dim sql As String = EmpleadoMostrado.SqlUpdate
+                If MiConexion.Update(sql) Then
+                    MessageBox.Show("Empleado actualizado")
+                    Me.ActualizarDatos()
+                    Me.Estado_Consulta()
+                Else
+                    MessageBox.Show("Error al actualizar empleado ")
+                End If
+        End Select
+    End Sub
+#End Region
+
+#Region "Otros"
     Private Sub LtsEmpleados_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LtsEmpleados.SelectedIndexChanged
         Me.ActualizarDatos()
-        EmpleadoMostrado = LtsEmpleados.SelectedItem
+        If LtsEmpleados.SelectedIndex = -1 Then
+            EmpleadoMostrado = New Usuario()
+        Else
+            EmpleadoMostrado = LtsEmpleados.SelectedItem
+        End If
+        Carga()
+    End Sub
+#End Region
+#End Region
+#Region "Procedimientos"
+    Private Sub Carga()
         txtDni.Text = EmpleadoMostrado.DNI
         txtContraseña.Text = EmpleadoMostrado.Password
         txtNombre.Text = EmpleadoMostrado.Nombre
@@ -99,17 +112,17 @@ Public Class FmrGestionUsuario
         txtApellido2.Text = EmpleadoMostrado.Apell_2
         txtEmail.Text = EmpleadoMostrado.Email
         If EmpleadoMostrado.Fecha_Alta = Nothing Then
-            DtpAlta.Value = Today
+            DtpAlta.Value = #01/01/2000#
         Else
             DtpAlta.Value = EmpleadoMostrado.Fecha_Alta
         End If
         If EmpleadoMostrado.Fecha_Nac = Nothing Then
-            DtpNacimiento.Value = Today
+            DtpNacimiento.Value = #01/01/2000#
         Else
             DtpNacimiento.Value = EmpleadoMostrado.Fecha_Nac
         End If
         txtIdFarmacia.Text = EmpleadoMostrado.Farmacia
-        'CboPuesto.SelectedIndex = Integer.Parse(EmpleadoMostrado(9))
+        'CboPuesto.SelectedValue = EmpleadoMostrado.Puesto
         SudSalario.Value = EmpleadoMostrado.Salario
         'ComboBoxTipoVia.SelectedIndex = EmpleadoMostrado.TipoVia
         txtVia.Text = EmpleadoMostrado.NombreVia
@@ -127,31 +140,111 @@ Public Class FmrGestionUsuario
         ChkCompras.Checked = EmpleadoMostrado.Compras
         ChkAlmacen.Checked = EmpleadoMostrado.Almacen
         ChkUsuarios.Checked = EmpleadoMostrado.Usuarios
-
     End Sub
 
-    Private Sub BtnBuscar_Click(sender As Object, e As EventArgs) Handles BtnBuscar.Click
-        Dim Loc As Integer = LtsEmpleados.FindString(TxtDNIBusqueda.Text)
-        If Loc = -1 Then
-            MessageBox.Show("No Encontrado")
-        Else
-            LtsEmpleados.SelectedIndex = Loc
-        End If
+    Private Sub descarga()
+        EmpleadoMostrado.DNI = txtDni.Text
+        EmpleadoMostrado.Password = txtContraseña.Text
+        EmpleadoMostrado.Nombre = txtNombre.Text
+        EmpleadoMostrado.Apell_1 = txtApellido1.Text
+        EmpleadoMostrado.Apell_2 = txtApellido2.Text
+        EmpleadoMostrado.Email = txtEmail.Text
+        'date time piker
+        EmpleadoMostrado.Fecha_Alta = DtpAlta.Value
+        'date time piker
+        EmpleadoMostrado.Fecha_Nac = DtpNacimiento.Value
+        'Especial(WIP)
+        EmpleadoMostrado.Farmacia = txtIdFarmacia.Text
+        'Combo(Wip)
+        'EmpleadoMostrado.Puesto = CboPuesto.SelectedValue
+        'Spiner
+        EmpleadoMostrado.Salario = SudSalario.Value
+        'COMBO
+        EmpleadoMostrado.TipoVia = ComboBoxTipoVia.SelectedValue
+
+        EmpleadoMostrado.NombreVia = txtVia.Text
+        EmpleadoMostrado.NoVia = TxtNVia.Text
+        EmpleadoMostrado.NoPortal = txtPortal.Text
+        EmpleadoMostrado.Piso = txtPiso.Text
+        EmpleadoMostrado.Puerta = txtPuerta.Text
+        EmpleadoMostrado.CodPostal = txtCodPostal.Text
+        EmpleadoMostrado.Pais = txtPais.Text
+        EmpleadoMostrado.Provinca = txtProvincia.Text
+        EmpleadoMostrado.Localidad = txtLocalidad.Text
+        'Chex Box
+        EmpleadoMostrado.Control_Total = ChkControlTotal.Checked
+        EmpleadoMostrado.Ventas = ChkVentas.Checked
+        EmpleadoMostrado.Compras = ChkCompras.Checked
+        EmpleadoMostrado.Almacen = ChkAlmacen.Checked
+        EmpleadoMostrado.Usuarios = ChkUsuarios.Checked
     End Sub
 
-    Private Sub BtnNewUser_Click(sender As Object, e As EventArgs) Handles BtnNewUser.Click
-        Me.Estado_Insert()
+    Private Sub Estado_Consulta()
+        Estado = 0
+        LtsEmpleados.Enabled = True
+        GrpDatosPersonales.Enabled = False
+        GrpDireccion.Enabled = False
+        GrpPermisos.Enabled = False
+        GrpPuesto.Enabled = False
+        BtnNewUser.Enabled = True
+        BtnEliminar.Enabled = True
+        BtnModificar.Enabled = True
+        BtnGuardar.Enabled = False
+        BtnCancelar.Enabled = False
     End Sub
 
-    Private Sub BtnModificar_Click(sender As Object, e As EventArgs) Handles BtnModificar.Click
-        Me.Estado_Modificacion()
+    Private Sub Estado_Insert()
+        Estado = 1
+        txtDni.Enabled = True
+        LtsEmpleados.Enabled = False
+        GrpDatosPersonales.Enabled = True
+        GrpDireccion.Enabled = True
+        GrpPermisos.Enabled = True
+        GrpPuesto.Enabled = True
+        BtnNewUser.Enabled = False
+        BtnModificar.Enabled = False
+        BtnEliminar.Enabled = False
+        BtnGuardar.Enabled = True
+        BtnCancelar.Enabled = True
     End Sub
 
-    Private Sub BtnEliminar_Click(sender As Object, e As EventArgs) Handles BtnEliminar.Click
-
+    Private Sub Estado_Modificacion()
+        Estado = 2
+        GrpDatosPersonales.Enabled = True
+        LtsEmpleados.Enabled = True
+        GrpDireccion.Enabled = True
+        GrpPermisos.Enabled = True
+        GrpPuesto.Enabled = True
+        BtnNewUser.Enabled = False
+        BtnModificar.Enabled = False
+        BtnEliminar.Enabled = False
+        BtnGuardar.Enabled = True
+        BtnCancelar.Enabled = True
+        txtDni.Enabled = False
     End Sub
 
-    Private Sub BtnCancelar_Click(sender As Object, e As EventArgs) Handles BtnCancelar.Click
-        Me.Estado_Consulta()
+    Private Sub ActualizarDatos()
+        Dim MiTabla As DataTable = MiConexion.Consultar("Select * from Empleados")
+        MisEmpleados.Clear()
+        For Each Mirow As DataRow In MiTabla.Rows
+            MisEmpleados.Add(New Usuario(Mirow))
+        Next
+        MiTabla = MiConexion.Consultar("Select * from Tipo_Via")
+        ListaVias.Clear()
+        For Each Mirow As DataRow In MiTabla.Rows
+            ListaVias.Add(New TipoVia(Mirow))
+        Next
     End Sub
+
+    Private Sub CargarListaEmpleados()
+        Me.ActualizarDatos()
+        LtsEmpleados.DataSource = MisEmpleados
+        LtsEmpleados.DisplayMember = "DNI"
+        LtsEmpleados.SelectedIndex = -1
+
+        CboPuesto.DataSource = ListaVias
+        CboPuesto.DisplayMember = "Despcripcion"
+        CboPuesto.ValueMember = "Id"
+    End Sub
+#End Region
 End Class

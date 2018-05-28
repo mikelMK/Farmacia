@@ -27,6 +27,7 @@ Public Class Login
             MessageBox.Show("Bienvenido/a " + MiUsuario.Nombre)
             Me.Close()
         Else
+            MiUsuario = Nothing
             MessageBox.Show("Usuario o Contraseña Incorrecta")
         End If
     End Sub

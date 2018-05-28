@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\Conexion.vb" />
+    <Compile Include="Clases\TipoPuesto.vb" />
     <Compile Include="Clases\TipoVia.vb" />
     <Compile Include="Clases\Usuario.vb" />
     <Compile Include="FmrMain.designer.vb">

@@ -32,9 +32,9 @@
 
 #Region "Constructores"
     ''' <summary>
-    ''' Constructo Usuario Con DataRow de Select * from Usuarios
+    ''' Constructo Usuario Con DataRow de Select * from Empleados
     ''' </summary>
-    ''' <param name="Usuario">Datarow de usuario</param>
+    ''' <param name="Usuario">Datarow de Empleados</param>
     Public Sub New(Usuario As DataRow)
         DNI = Usuario(0)
         Password = Usuario(1)
@@ -334,5 +334,135 @@
         End Set
     End Property
 #End Region
+#Region "Metodos"
+    ''' <summary>
+    ''' Retorna la SQl para el Insert.
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function SqlInsert()
+        Dim Querry As String = "Insert Into Empleados("
+        Querry = Querry & "DNI,Contrasena,Nombre,Apell_1,Apell_2,Email,Fecha_Nac,Fecha_Alta,"
+        Querry = Querry & "Id_Farmacia,Puesto,Salario,"
+        Querry = Querry & "Tipo_Via,Nombre_Via,No_Via,No_Ptal,Piso,Puerta,Cod_Postal,Pais,Provincia,Localidad,"
+        Querry = Querry & "ControlTotal,Ventas,Almacen,Compras,Usuarios) Values("
+        Querry = Querry & "'" & Me.DNI & "',"
+        Querry = Querry & "'" & Me.Password & "',"
+        Querry = Querry & "'" & Me.Nombre & "',"
+        Querry = Querry & "'" & Me.Apell_1 & "',"
+        Querry = Querry & "'" & Me.Apell_2 & "',"
+        Querry = Querry & "'" & Me.Email & "',"
+        Querry = Querry & "str_to_date('" & Me.Fecha_Nac & "','%d/%m/%y'),"
+        Querry = Querry & "str_to_date('" & Me.Fecha_Alta & "','%d/%m/%y'),"
+        Querry = Querry & Me.Farmacia & ","
+        Querry = Querry & Me.Puesto & ","
+        Querry = Querry & Me.Salario & ","
+        Querry = Querry & Me.TipoVia & ","
+        Querry = Querry & "'" & Me.NombreVia & "',"
+        Querry = Querry & "'" & Me.NoVia & "',"
+        Querry = Querry & "'" & Me.NoPortal & "',"
+        Querry = Querry & "'" & Me.Piso & "',"
+        Querry = Querry & "'" & Me.Puerta & "',"
+        Querry = Querry & "'" & Me.CodPostal & "',"
+        Querry = Querry & "'" & Me.Pais & "',"
+        Querry = Querry & "'" & Me.Provinca & "',"
+        Querry = Querry & "'" & Me.Localidad & "',"
+
+        If Me.Control_Total Then
+            Querry = Querry & "1" & ","
+        Else
+            Querry = Querry & "0" & ","
+        End If
+        If Me.Ventas Then
+            Querry = Querry & "1" & ","
+        Else
+            Querry = Querry & "0" & ","
+        End If
+        If Me.Almacen Then
+            Querry = Querry & "1" & ","
+        Else
+            Querry = Querry & "0" & ","
+        End If
+        If Me.Compras Then
+            Querry = Querry & "1" & ","
+        Else
+            Querry = Querry & "0" & ","
+        End If
+        If Me.Usuarios Then
+            Querry = Querry & "1"
+        Else
+            Querry = Querry & "0"
+        End If
+
+        Querry = Querry & ")"
+
+        Return Querry
+    End Function
+    ''' <summary>
+    ''' Retorna la SQl para el Update.
+    ''' NOTA El DNI no se puede actualizar
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function SqlUpdate()
+        Dim Querry As String = "Update Empleados Set "
+        Querry = Querry & "Contrasena='" & Me.Password & "',"
+        Querry = Querry & "Nombre='" & Me.Nombre & "',"
+        Querry = Querry & "Apell_1='" & Me.Apell_1 & "',"
+        Querry = Querry & "Apell_2='" & Me.Apell_2 & "',"
+        Querry = Querry & "Email='" & Me.Email & "',"
+        Querry = Querry & "Fecha_Nac=str_to_date('" & Me.Fecha_Nac & "','%d/%m/%y'),"
+        Querry = Querry & "Fecha_Alta=str_to_date('" & Me.Fecha_Alta & "','%d/%m/%y'),"
+        Querry = Querry & "Id_Farmacia=" & Me.Farmacia & ","
+        Querry = Querry & "Puesto=" & Me.Puesto & ","
+        Querry = Querry & "Salario=" & Me.Salario & ","
+        Querry = Querry & "Tipo_Via=" & Me.TipoVia & ","
+        Querry = Querry & "Nombre_Via='" & Me.NombreVia & "',"
+        Querry = Querry & "No_Via='" & Me.NoVia & "',"
+        Querry = Querry & "No_Ptal='" & Me.NoPortal & "',"
+        Querry = Querry & "Piso='" & Me.Piso & "',"
+        Querry = Querry & "Puerta='" & Me.Puerta & "',"
+        Querry = Querry & "Cod_Postal='" & Me.CodPostal & "',"
+        Querry = Querry & "Pais='" & Me.Pais & "',"
+        Querry = Querry & "Provincia='" & Me.Provinca & "',"
+        Querry = Querry & "Localidad='" & Me.Localidad & "',"
+
+        If Me.Control_Total Then
+            Querry = Querry & "ControlTotal=1,"
+        Else
+            Querry = Querry & "ControlTotal=0,"
+        End If
+        If Me.Ventas Then
+            Querry = Querry & "ControlTotal=1,"
+        Else
+            Querry = Querry & "ControlTotal=0,"
+        End If
+        If Me.Almacen Then
+            Querry = Querry & "ControlTotal=1,"
+        Else
+            Querry = Querry & "ControlTotal=0,"
+        End If
+        If Me.Compras Then
+            Querry = Querry & "ControlTotal=1,"
+        Else
+            Querry = Querry & "ControlTotal=0,"
+        End If
+        If Me.Usuarios Then
+            Querry = Querry & "ControlTotal=1"
+        Else
+            Querry = Querry & "ControlTotal=0"
+        End If
+
+        Querry = Querry & " Where DNI='" & Me.DNI & "'"
+        Return Querry
+    End Function
+    ''' <summary>
+    ''' Retorna la SQl para el Delete.
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function SqlDelete()
+        Dim Querry As String = "Delete From Empleados where DNI='" & Me.DNI & "'"
+        Return Querry
+    End Function
+#End Region
+
 
 End Class

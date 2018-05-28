@@ -81,8 +81,6 @@ Partial Class FmrGestionUsuario
         Me.BtnGuardar = New System.Windows.Forms.Button()
         Me.BtnCancelar = New System.Windows.Forms.Button()
         Me.BtnEliminar = New System.Windows.Forms.Button()
-        Me.TxtDNIBusqueda = New System.Windows.Forms.TextBox()
-        Me.BtnBuscar = New System.Windows.Forms.Button()
         Me.BtnModificar = New System.Windows.Forms.Button()
         Me.GrpDatosPersonales.SuspendLayout()
         Me.GrpPuesto.SuspendLayout()
@@ -94,9 +92,9 @@ Partial Class FmrGestionUsuario
         'LtsEmpleados
         '
         Me.LtsEmpleados.FormattingEnabled = True
-        Me.LtsEmpleados.Location = New System.Drawing.Point(12, 77)
+        Me.LtsEmpleados.Location = New System.Drawing.Point(12, 25)
         Me.LtsEmpleados.Name = "LtsEmpleados"
-        Me.LtsEmpleados.Size = New System.Drawing.Size(158, 381)
+        Me.LtsEmpleados.Size = New System.Drawing.Size(158, 433)
         Me.LtsEmpleados.TabIndex = 0
         '
         'BtnRecargarEmpleados
@@ -383,6 +381,7 @@ Partial Class FmrGestionUsuario
         Me.DtpAlta.Name = "DtpAlta"
         Me.DtpAlta.Size = New System.Drawing.Size(219, 20)
         Me.DtpAlta.TabIndex = 122
+        Me.DtpAlta.Value = New Date(2000, 1, 1, 0, 1, 0, 0)
         '
         'DtpNacimiento
         '
@@ -390,6 +389,7 @@ Partial Class FmrGestionUsuario
         Me.DtpNacimiento.Name = "DtpNacimiento"
         Me.DtpNacimiento.Size = New System.Drawing.Size(217, 20)
         Me.DtpNacimiento.TabIndex = 121
+        Me.DtpNacimiento.Value = New Date(2000, 1, 1, 0, 1, 0, 0)
         '
         'txtEmail
         '
@@ -634,23 +634,6 @@ Partial Class FmrGestionUsuario
         Me.BtnEliminar.Text = "Eliminar"
         Me.BtnEliminar.UseVisualStyleBackColor = True
         '
-        'TxtDNIBusqueda
-        '
-        Me.TxtDNIBusqueda.Location = New System.Drawing.Point(12, 22)
-        Me.TxtDNIBusqueda.Name = "TxtDNIBusqueda"
-        Me.TxtDNIBusqueda.Size = New System.Drawing.Size(158, 20)
-        Me.TxtDNIBusqueda.TabIndex = 117
-        Me.TxtDNIBusqueda.Text = "%"
-        '
-        'BtnBuscar
-        '
-        Me.BtnBuscar.Location = New System.Drawing.Point(12, 48)
-        Me.BtnBuscar.Name = "BtnBuscar"
-        Me.BtnBuscar.Size = New System.Drawing.Size(158, 23)
-        Me.BtnBuscar.TabIndex = 118
-        Me.BtnBuscar.Text = "Buscar"
-        Me.BtnBuscar.UseVisualStyleBackColor = True
-        '
         'BtnModificar
         '
         Me.BtnModificar.Location = New System.Drawing.Point(303, 462)
@@ -667,8 +650,6 @@ Partial Class FmrGestionUsuario
         Me.BackColor = System.Drawing.SystemColors.ActiveBorder
         Me.ClientSize = New System.Drawing.Size(842, 495)
         Me.Controls.Add(Me.BtnModificar)
-        Me.Controls.Add(Me.BtnBuscar)
-        Me.Controls.Add(Me.TxtDNIBusqueda)
         Me.Controls.Add(Me.BtnEliminar)
         Me.Controls.Add(Me.BtnCancelar)
         Me.Controls.Add(Me.BtnGuardar)
@@ -754,8 +735,6 @@ Partial Class FmrGestionUsuario
     Friend WithEvents BtnGuardar As Button
     Friend WithEvents BtnCancelar As Button
     Friend WithEvents BtnEliminar As Button
-    Friend WithEvents TxtDNIBusqueda As TextBox
-    Friend WithEvents BtnBuscar As Button
     Friend WithEvents BtnModificar As Button
     Friend WithEvents TxtNVia As TextBox
     Friend WithEvents Label20 As Label

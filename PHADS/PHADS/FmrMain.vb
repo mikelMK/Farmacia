@@ -27,6 +27,9 @@ Public Class FmrMain
         Login = New Login(MiConexion)
         Login.ShowDialog()
         Usuario = Login.Usuario
+        If Usuario Is Nothing Then
+            Me.Close()
+        End If
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
     End Sub
 
