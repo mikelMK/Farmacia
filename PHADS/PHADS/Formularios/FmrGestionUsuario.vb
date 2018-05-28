@@ -125,13 +125,17 @@ Public Class FmrGestionUsuario
         End If
         txtIdFarmacia.Text = EmpleadoMostrado.Farmacia
 
-        ListaPuestos.Find(AddressOf )
-        'Dim SelPues As TipoPuesto
-        'For Each Puesto As TipoPuesto In ListaPuestos
-
-        'Next
-        'CboPuesto.SelectedValue = EmpleadoMostrado.Puesto
+        For i = 0 To ListaPuestos.Count() - 1
+            If ListaPuestos(i).IdPuesto = EmpleadoMostrado.Puesto Then
+                CboPuesto.SelectedIndex = i
+            End If
+        Next
         SudSalario.Value = EmpleadoMostrado.Salario
+        For i = 0 To ListaVias.Count() - 1
+            If ListaVias(i).Id = EmpleadoMostrado.TipoVia Then
+                CboPuesto.SelectedIndex = i
+            End If
+        Next
         'ComboBoxTipoVia.SelectedIndex = EmpleadoMostrado.TipoVia
         txtVia.Text = EmpleadoMostrado.NombreVia
         TxtNVia.Text = EmpleadoMostrado.NoVia
@@ -253,7 +257,7 @@ Public Class FmrGestionUsuario
         Me.ActualizarDatos()
         LtsEmpleados.DataSource = MisEmpleados
         LtsEmpleados.DisplayMember = "DNI"
-        LtsEmpleados.SelectedIndex = -1
+        LtsEmpleados.SelectedIndex = 0
 
         CboTipoVia.DataSource = ListaVias
         CboTipoVia.DisplayMember = "Despcripcion"

@@ -52,8 +52,8 @@
         Else
             Fecha_Alta = Usuario(7)
         End If
-        Farmacia = Usuario(9)
-        Puesto = Usuario(8)
+        Farmacia = Usuario(8)
+        Puesto = Usuario(9)
         Salario = Usuario(10)
         TipoVia = Usuario(11)
         NombreVia = Usuario(12)
