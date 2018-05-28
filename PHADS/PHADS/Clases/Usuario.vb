@@ -340,62 +340,62 @@
     ''' </summary>
     ''' <returns></returns>
     Public Function SqlInsert()
-        Dim Querry As String = "Insert Into Empleados("
-        Querry = Querry & "DNI,Contrasena,Nombre,Apell_1,Apell_2,Email,Fecha_Nac,Fecha_Alta,"
-        Querry = Querry & "Id_Farmacia,Puesto,Salario,"
-        Querry = Querry & "Tipo_Via,Nombre_Via,No_Via,No_Ptal,Piso,Puerta,Cod_Postal,Pais,Provincia,Localidad,"
-        Querry = Querry & "ControlTotal,Ventas,Almacen,Compras,Usuarios) Values("
-        Querry = Querry & "'" & Me.DNI & "',"
-        Querry = Querry & "'" & Me.Password & "',"
-        Querry = Querry & "'" & Me.Nombre & "',"
-        Querry = Querry & "'" & Me.Apell_1 & "',"
-        Querry = Querry & "'" & Me.Apell_2 & "',"
-        Querry = Querry & "'" & Me.Email & "',"
-        Querry = Querry & "str_to_date('" & Me.Fecha_Nac & "','%d/%m/%y'),"
-        Querry = Querry & "str_to_date('" & Me.Fecha_Alta & "','%d/%m/%y'),"
-        Querry = Querry & Me.Farmacia & ","
-        Querry = Querry & Me.Puesto & ","
-        Querry = Querry & Me.Salario & ","
-        Querry = Querry & Me.TipoVia & ","
-        Querry = Querry & "'" & Me.NombreVia & "',"
-        Querry = Querry & "'" & Me.NoVia & "',"
-        Querry = Querry & "'" & Me.NoPortal & "',"
-        Querry = Querry & "'" & Me.Piso & "',"
-        Querry = Querry & "'" & Me.Puerta & "',"
-        Querry = Querry & "'" & Me.CodPostal & "',"
-        Querry = Querry & "'" & Me.Pais & "',"
-        Querry = Querry & "'" & Me.Provinca & "',"
-        Querry = Querry & "'" & Me.Localidad & "',"
+        Dim Query As String = "Insert Into Empleados("
+        Query = Query & "DNI,Contrasena,Nombre,Apell_1,Apell_2,Email,Fecha_Nac,Fecha_Alta,"
+        Query = Query & "Id_Farmacia,Puesto,Salario,"
+        Query = Query & "Tipo_Via,Nombre_Via,No_Via,No_Ptal,Piso,Puerta,Cod_Postal,Pais,Provincia,Localidad,"
+        Query = Query & "ControlTotal,Ventas,Almacen,Compras,Usuarios) Values("
+        Query = Query & "'" & Me.DNI & "',"
+        Query = Query & "'" & Me.Password & "',"
+        Query = Query & "'" & Me.Nombre & "',"
+        Query = Query & "'" & Me.Apell_1 & "',"
+        Query = Query & "'" & Me.Apell_2 & "',"
+        Query = Query & "'" & Me.Email & "',"
+        Query = Query & "str_to_date('" & Me.Fecha_Nac & "','%d/%m/%y'),"
+        Query = Query & "str_to_date('" & Me.Fecha_Alta & "','%d/%m/%y'),"
+        Query = Query & Me.Farmacia & ","
+        Query = Query & Me.Puesto & ","
+        Query = Query & Me.Salario & ","
+        Query = Query & Me.TipoVia & ","
+        Query = Query & "'" & Me.NombreVia & "',"
+        Query = Query & "'" & Me.NoVia & "',"
+        Query = Query & "'" & Me.NoPortal & "',"
+        Query = Query & "'" & Me.Piso & "',"
+        Query = Query & "'" & Me.Puerta & "',"
+        Query = Query & "'" & Me.CodPostal & "',"
+        Query = Query & "'" & Me.Pais & "',"
+        Query = Query & "'" & Me.Provinca & "',"
+        Query = Query & "'" & Me.Localidad & "',"
 
         If Me.Control_Total Then
-            Querry = Querry & "1" & ","
+            Query = Query & "1" & ","
         Else
-            Querry = Querry & "0" & ","
+            Query = Query & "0" & ","
         End If
         If Me.Ventas Then
-            Querry = Querry & "1" & ","
+            Query = Query & "1" & ","
         Else
-            Querry = Querry & "0" & ","
+            Query = Query & "0" & ","
         End If
         If Me.Almacen Then
-            Querry = Querry & "1" & ","
+            Query = Query & "1" & ","
         Else
-            Querry = Querry & "0" & ","
+            Query = Query & "0" & ","
         End If
         If Me.Compras Then
-            Querry = Querry & "1" & ","
+            Query = Query & "1" & ","
         Else
-            Querry = Querry & "0" & ","
+            Query = Query & "0" & ","
         End If
         If Me.Usuarios Then
-            Querry = Querry & "1"
+            Query = Query & "1"
         Else
-            Querry = Querry & "0"
+            Query = Query & "0"
         End If
 
-        Querry = Querry & ")"
+        Query = Query & ")"
 
-        Return Querry
+        Return Query
     End Function
     ''' <summary>
     ''' Retorna la SQl para el Update.
@@ -403,64 +403,64 @@
     ''' </summary>
     ''' <returns></returns>
     Public Function SqlUpdate()
-        Dim Querry As String = "Update Empleados Set "
-        Querry = Querry & "Contrasena='" & Me.Password & "',"
-        Querry = Querry & "Nombre='" & Me.Nombre & "',"
-        Querry = Querry & "Apell_1='" & Me.Apell_1 & "',"
-        Querry = Querry & "Apell_2='" & Me.Apell_2 & "',"
-        Querry = Querry & "Email='" & Me.Email & "',"
-        Querry = Querry & "Fecha_Nac=str_to_date('" & Me.Fecha_Nac & "','%d/%m/%y'),"
-        Querry = Querry & "Fecha_Alta=str_to_date('" & Me.Fecha_Alta & "','%d/%m/%y'),"
-        Querry = Querry & "Id_Farmacia=" & Me.Farmacia & ","
-        Querry = Querry & "Puesto=" & Me.Puesto & ","
-        Querry = Querry & "Salario=" & Me.Salario & ","
-        Querry = Querry & "Tipo_Via=" & Me.TipoVia & ","
-        Querry = Querry & "Nombre_Via='" & Me.NombreVia & "',"
-        Querry = Querry & "No_Via='" & Me.NoVia & "',"
-        Querry = Querry & "No_Ptal='" & Me.NoPortal & "',"
-        Querry = Querry & "Piso='" & Me.Piso & "',"
-        Querry = Querry & "Puerta='" & Me.Puerta & "',"
-        Querry = Querry & "Cod_Postal='" & Me.CodPostal & "',"
-        Querry = Querry & "Pais='" & Me.Pais & "',"
-        Querry = Querry & "Provincia='" & Me.Provinca & "',"
-        Querry = Querry & "Localidad='" & Me.Localidad & "',"
+        Dim Query As String = "Update Empleados Set "
+        Query = Query & "Contrasena='" & Me.Password & "',"
+        Query = Query & "Nombre='" & Me.Nombre & "',"
+        Query = Query & "Apell_1='" & Me.Apell_1 & "',"
+        Query = Query & "Apell_2='" & Me.Apell_2 & "',"
+        Query = Query & "Email='" & Me.Email & "',"
+        Query = Query & "Fecha_Nac=str_to_date('" & Me.Fecha_Nac & "','%d/%m/%y'),"
+        Query = Query & "Fecha_Alta=str_to_date('" & Me.Fecha_Alta & "','%d/%m/%y'),"
+        Query = Query & "Id_Farmacia=" & Me.Farmacia & ","
+        Query = Query & "Puesto=" & Me.Puesto & ","
+        Query = Query & "Salario=" & Me.Salario & ","
+        Query = Query & "Tipo_Via=" & Me.TipoVia & ","
+        Query = Query & "Nombre_Via='" & Me.NombreVia & "',"
+        Query = Query & "No_Via='" & Me.NoVia & "',"
+        Query = Query & "No_Ptal='" & Me.NoPortal & "',"
+        Query = Query & "Piso='" & Me.Piso & "',"
+        Query = Query & "Puerta='" & Me.Puerta & "',"
+        Query = Query & "Cod_Postal='" & Me.CodPostal & "',"
+        Query = Query & "Pais='" & Me.Pais & "',"
+        Query = Query & "Provincia='" & Me.Provinca & "',"
+        Query = Query & "Localidad='" & Me.Localidad & "',"
 
         If Me.Control_Total Then
-            Querry = Querry & "ControlTotal=1,"
+            Query = Query & "ControlTotal=1,"
         Else
-            Querry = Querry & "ControlTotal=0,"
+            Query = Query & "ControlTotal=0,"
         End If
         If Me.Ventas Then
-            Querry = Querry & "ControlTotal=1,"
+            Query = Query & "ControlTotal=1,"
         Else
-            Querry = Querry & "ControlTotal=0,"
+            Query = Query & "ControlTotal=0,"
         End If
         If Me.Almacen Then
-            Querry = Querry & "ControlTotal=1,"
+            Query = Query & "ControlTotal=1,"
         Else
-            Querry = Querry & "ControlTotal=0,"
+            Query = Query & "ControlTotal=0,"
         End If
         If Me.Compras Then
-            Querry = Querry & "ControlTotal=1,"
+            Query = Query & "ControlTotal=1,"
         Else
-            Querry = Querry & "ControlTotal=0,"
+            Query = Query & "ControlTotal=0,"
         End If
         If Me.Usuarios Then
-            Querry = Querry & "ControlTotal=1"
+            Query = Query & "ControlTotal=1"
         Else
-            Querry = Querry & "ControlTotal=0"
+            Query = Query & "ControlTotal=0"
         End If
 
-        Querry = Querry & " Where DNI='" & Me.DNI & "'"
-        Return Querry
+        Query = Query & " Where DNI='" & Me.DNI & "'"
+        Return Query
     End Function
     ''' <summary>
     ''' Retorna la SQl para el Delete.
     ''' </summary>
     ''' <returns></returns>
     Public Function SqlDelete()
-        Dim Querry As String = "Delete From Empleados where DNI='" & Me.DNI & "'"
-        Return Querry
+        Dim Query As String = "Delete From Empleados where DNI='" & Me.DNI & "'"
+        Return Query
     End Function
 #End Region
 

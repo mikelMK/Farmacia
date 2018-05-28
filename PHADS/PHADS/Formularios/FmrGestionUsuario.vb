@@ -1,12 +1,14 @@
 ﻿Imports PHADS.Conexion
 Imports PHADS.Usuario
 Imports PHADS.TipoVia
+Imports PHADS.TipoPuesto
 Public Class FmrGestionUsuario
 #Region "Variables"
     Private MiConexion As Conexion
     Private Estado As Integer = 0
     Dim MisEmpleados As List(Of Usuario) = New List(Of Usuario)
     Dim ListaVias As List(Of TipoVia) = New List(Of TipoVia)
+    Dim ListaPuestos As List(Of TipoPuesto) = New List(Of TipoPuesto)
     Dim EmpleadoMostrado As Usuario = New Usuario()
 #End Region
 #Region "Constructores"
@@ -20,7 +22,7 @@ Public Class FmrGestionUsuario
 #Region "Manejadores"
 #Region "Load"
     Private Sub FmrGestionUsuario_Load(sender As Object, e As EventArgs) Handles Me.Load
-        CargarListaEmpleados()
+        CargarListas()
         Me.Estado_Consulta()
     End Sub
 #End Region
@@ -122,6 +124,12 @@ Public Class FmrGestionUsuario
             DtpNacimiento.Value = EmpleadoMostrado.Fecha_Nac
         End If
         txtIdFarmacia.Text = EmpleadoMostrado.Farmacia
+
+        ListaPuestos.Find(AddressOf )
+        'Dim SelPues As TipoPuesto
+        'For Each Puesto As TipoPuesto In ListaPuestos
+
+        'Next
         'CboPuesto.SelectedValue = EmpleadoMostrado.Puesto
         SudSalario.Value = EmpleadoMostrado.Salario
         'ComboBoxTipoVia.SelectedIndex = EmpleadoMostrado.TipoVia
@@ -156,11 +164,11 @@ Public Class FmrGestionUsuario
         'Especial(WIP)
         EmpleadoMostrado.Farmacia = txtIdFarmacia.Text
         'Combo(Wip)
-        'EmpleadoMostrado.Puesto = CboPuesto.SelectedValue
+        EmpleadoMostrado.Puesto = CboPuesto.SelectedValue
         'Spiner
         EmpleadoMostrado.Salario = SudSalario.Value
         'COMBO
-        EmpleadoMostrado.TipoVia = ComboBoxTipoVia.SelectedValue
+        EmpleadoMostrado.TipoVia = CboTipoVia.SelectedValue
 
         EmpleadoMostrado.NombreVia = txtVia.Text
         EmpleadoMostrado.NoVia = TxtNVia.Text
@@ -234,17 +242,27 @@ Public Class FmrGestionUsuario
         For Each Mirow As DataRow In MiTabla.Rows
             ListaVias.Add(New TipoVia(Mirow))
         Next
+        MiTabla = MiConexion.Consultar("Select * from Tipo_Puesto")
+        ListaPuestos.Clear()
+        For Each Mirow As DataRow In MiTabla.Rows
+            ListaPuestos.Add(New TipoPuesto(Mirow))
+        Next
     End Sub
 
-    Private Sub CargarListaEmpleados()
+    Private Sub CargarListas()
         Me.ActualizarDatos()
         LtsEmpleados.DataSource = MisEmpleados
         LtsEmpleados.DisplayMember = "DNI"
         LtsEmpleados.SelectedIndex = -1
 
-        CboPuesto.DataSource = ListaVias
+        CboTipoVia.DataSource = ListaVias
+        CboTipoVia.DisplayMember = "Despcripcion"
+        CboTipoVia.ValueMember = "Id"
+
+        CboPuesto.DataSource = ListaPuestos
         CboPuesto.DisplayMember = "Despcripcion"
-        CboPuesto.ValueMember = "Id"
+        CboPuesto.ValueMember = "IdPuesto"
+
     End Sub
 #End Region
 End Class

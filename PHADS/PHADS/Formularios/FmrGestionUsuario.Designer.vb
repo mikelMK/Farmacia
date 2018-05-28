@@ -24,7 +24,7 @@ Partial Class FmrGestionUsuario
     Private Sub InitializeComponent()
         Me.LtsEmpleados = New System.Windows.Forms.ListBox()
         Me.BtnRecargarEmpleados = New System.Windows.Forms.Button()
-        Me.ComboBoxTipoVia = New System.Windows.Forms.ComboBox()
+        Me.CboTipoVia = New System.Windows.Forms.ComboBox()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.txtPais = New System.Windows.Forms.TextBox()
         Me.Label22 = New System.Windows.Forms.Label()
@@ -106,13 +106,13 @@ Partial Class FmrGestionUsuario
         Me.BtnRecargarEmpleados.Text = "Recargar"
         Me.BtnRecargarEmpleados.UseVisualStyleBackColor = True
         '
-        'ComboBoxTipoVia
+        'CboTipoVia
         '
-        Me.ComboBoxTipoVia.FormattingEnabled = True
-        Me.ComboBoxTipoVia.Location = New System.Drawing.Point(81, 23)
-        Me.ComboBoxTipoVia.Name = "ComboBoxTipoVia"
-        Me.ComboBoxTipoVia.Size = New System.Drawing.Size(139, 21)
-        Me.ComboBoxTipoVia.TabIndex = 104
+        Me.CboTipoVia.FormattingEnabled = True
+        Me.CboTipoVia.Location = New System.Drawing.Point(81, 23)
+        Me.CboTipoVia.Name = "CboTipoVia"
+        Me.CboTipoVia.Size = New System.Drawing.Size(139, 21)
+        Me.CboTipoVia.TabIndex = 104
         '
         'Label23
         '
@@ -574,7 +574,7 @@ Partial Class FmrGestionUsuario
         Me.GrpDireccion.Controls.Add(Me.Label20)
         Me.GrpDireccion.Controls.Add(Me.TxtNVia)
         Me.GrpDireccion.Controls.Add(Me.Label23)
-        Me.GrpDireccion.Controls.Add(Me.ComboBoxTipoVia)
+        Me.GrpDireccion.Controls.Add(Me.CboTipoVia)
         Me.GrpDireccion.Controls.Add(Me.txtVia)
         Me.GrpDireccion.Controls.Add(Me.Label11)
         Me.GrpDireccion.Controls.Add(Me.txtCodPostal)
@@ -680,7 +680,7 @@ Partial Class FmrGestionUsuario
 
     Friend WithEvents LtsEmpleados As ListBox
     Friend WithEvents BtnRecargarEmpleados As Button
-    Friend WithEvents ComboBoxTipoVia As ComboBox
+    Friend WithEvents CboTipoVia As ComboBox
     Friend WithEvents Label23 As Label
     Friend WithEvents txtPais As TextBox
     Friend WithEvents Label22 As Label

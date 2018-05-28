@@ -121,41 +121,41 @@
     ''' </summary>
     ''' <returns></returns>
     Public Function SqlInsert()
-        Dim Querry As String = "Insert Into Tipo_Puesto(Id_Puesto,Desc_Puesto,ControlTotal,Ventas,Almacen,Compras,Usuarios)Values("
-        Querry = Querry & Me.IdPuesto & ",'"
-        Querry = Querry & Me.Despcripcion & "','"
+        Dim Query As String = "Insert Into Tipo_Puesto(Id_Puesto,Desc_Puesto,ControlTotal,Ventas,Almacen,Compras,Usuarios)Values("
+        Query = Query & Me.IdPuesto & ",'"
+        Query = Query & Me.Despcripcion & "','"
 
         If Me.ControlTotal Then
-            Querry = Querry & "1,"
+            Query = Query & "1,"
         Else
-            Querry = Querry & "0,"
+            Query = Query & "0,"
         End If
 
         If Me.Ventas Then
-            Querry = Querry & "1,"
+            Query = Query & "1,"
         Else
-            Querry = Querry & "0,"
+            Query = Query & "0,"
         End If
 
         If Me.Almacen Then
-            Querry = Querry & "1,"
+            Query = Query & "1,"
         Else
-            Querry = Querry & "0,"
+            Query = Query & "0,"
         End If
 
         If Me.Compras Then
-            Querry = Querry & "1,"
+            Query = Query & "1,"
         Else
-            Querry = Querry & "0,"
+            Query = Query & "0,"
         End If
 
         If Me.Usuarios Then
-            Querry = Querry & "1)"
+            Query = Query & "1)"
         Else
-            Querry = Querry & "0)"
+            Query = Query & "0)"
         End If
 
-        Return Querry
+        Return Query
     End Function
     ''' <summary>
     ''' Retorna la SQl para el Update.
@@ -163,50 +163,50 @@
     ''' </summary>
     ''' <returns></returns>
     Public Function SqlUpdate()
-        Dim Querry As String = "Update Tipo_Puesto Set "
-        Querry = Querry & "Id_Puesto=" & Me.IdPuesto
-        Querry = Querry & ", Desc_Puesto='" & Me.Despcripcion & "',"
+        Dim Query As String = "Update Tipo_Puesto Set "
+        Query = Query & "Id_Puesto=" & Me.IdPuesto
+        Query = Query & ", Desc_Puesto='" & Me.Despcripcion & "',"
         If Me.ControlTotal Then
-            Querry = Querry & "ControlTotal=1,"
+            Query = Query & "ControlTotal=1,"
         Else
-            Querry = Querry & "ControlTotal=0,"
+            Query = Query & "ControlTotal=0,"
         End If
 
         If Me.Ventas Then
-            Querry = Querry & "Ventas=1,"
+            Query = Query & "Ventas=1,"
         Else
-            Querry = Querry & "Ventas=0,"
+            Query = Query & "Ventas=0,"
         End If
 
         If Me.Almacen Then
-            Querry = Querry & "Almacen=1,"
+            Query = Query & "Almacen=1,"
         Else
-            Querry = Querry & "Almacen=0,"
+            Query = Query & "Almacen=0,"
         End If
 
         If Me.Ventas Then
-            Querry = Querry & "Compras=1,"
+            Query = Query & "Compras=1,"
         Else
-            Querry = Querry & "Compras=0,"
+            Query = Query & "Compras=0,"
         End If
 
         If Me.Usuarios Then
-            Querry = Querry & "Usuarios=1)"
+            Query = Query & "Usuarios=1)"
         Else
-            Querry = Querry & "Usuarios=0)"
+            Query = Query & "Usuarios=0)"
         End If
 
 
 
-        Return Querry
+        Return Query
     End Function
     ''' <summary>
     ''' Retorna la SQl para el Delete.
     ''' </summary>
     ''' <returns></returns>
     Public Function SqlDelete()
-        Dim Querry As String = "Delete From Tipo_Puesto where Id_Puesto='" & Me.IdPuesto & "'"
-        Return Querry
+        Dim Query As String = "Delete From Tipo_Puesto where Id_Puesto='" & Me.IdPuesto & "'"
+        Return Query
     End Function
 #End Region
 End Class

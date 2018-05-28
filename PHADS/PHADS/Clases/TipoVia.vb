@@ -42,10 +42,10 @@
     ''' </summary>
     ''' <returns></returns>
     Public Function SqlInsert()
-        Dim Querry As String = "Insert Into Tipo_Via(Id_Via,Desc_Via)Values("
-        Querry = Querry & Me.Id & ",'"
-        Querry = Querry & Me.Despcripcion & "')"
-        Return Querry
+        Dim Query As String = "Insert Into Tipo_Via(Id_Via,Desc_Via)Values("
+        Query = Query & Me.Id & ",'"
+        Query = Query & Me.Despcripcion & "')"
+        Return Query
     End Function
     ''' <summary>
     ''' Retorna la SQl para el Update.
@@ -53,19 +53,19 @@
     ''' </summary>
     ''' <returns></returns>
     Public Function SqlUpdate()
-        Dim Querry As String = "Update Tipo_Via Set "
-        Querry = Querry & "Id_Via=" & Me.Id
-        Querry = Querry & ",Desc_Via='" & Me.Despcripcion & "'"
+        Dim Query As String = "Update Tipo_Via Set "
+        Query = Query & "Id_Via=" & Me.Id
+        Query = Query & ",Desc_Via='" & Me.Despcripcion & "'"
 
-        Return Querry
+        Return Query
     End Function
     ''' <summary>
     ''' Retorna la SQl para el Delete.
     ''' </summary>
     ''' <returns></returns>
     Public Function SqlDelete()
-        Dim Querry As String = "Delete From Tipo_Via where id_Via='" & Me.Id & "'"
-        Return Querry
+        Dim Query As String = "Delete From Tipo_Via where id_Via='" & Me.Id & "'"
+        Return Query
     End Function
 #End Region
 
