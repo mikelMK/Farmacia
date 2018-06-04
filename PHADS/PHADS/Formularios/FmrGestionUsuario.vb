@@ -125,18 +125,19 @@ Public Class FmrGestionUsuario
         End If
         txtIdFarmacia.Text = EmpleadoMostrado.Farmacia
 
-        For i = 0 To ListaPuestos.Count() - 1
-            If ListaPuestos(i).IdPuesto = EmpleadoMostrado.Puesto Then
+        For i = 0 To CboPuesto.Items.Count - 1
+            If CboPuesto.SelectedValue <> EmpleadoMostrado.Puesto Then
                 CboPuesto.SelectedIndex = i
+                i = CboPuesto.Items.Count - 1
             End If
         Next
         SudSalario.Value = EmpleadoMostrado.Salario
-        For i = 0 To ListaVias.Count() - 1
-            If ListaVias(i).Id = EmpleadoMostrado.TipoVia Then
+        For i = 0 To CboTipoVia.Items.Count - 1
+            If CboPuesto.SelectedValue <> EmpleadoMostrado.TipoVia Then
                 CboPuesto.SelectedIndex = i
+                i = CboTipoVia.Items.Count - 1
             End If
         Next
-        'ComboBoxTipoVia.SelectedIndex = EmpleadoMostrado.TipoVia
         txtVia.Text = EmpleadoMostrado.NombreVia
         TxtNVia.Text = EmpleadoMostrado.NoVia
         txtPortal.Text = EmpleadoMostrado.NoPortal
@@ -266,7 +267,6 @@ Public Class FmrGestionUsuario
         CboPuesto.DataSource = ListaPuestos
         CboPuesto.DisplayMember = "Despcripcion"
         CboPuesto.ValueMember = "IdPuesto"
-
     End Sub
 #End Region
 End Class
