@@ -66,9 +66,9 @@
         Provinca = Usuario(19)
         Localidad = Usuario(20)
         If Usuario(21) = 1 Then
-            Control_Total = True
+            ControlTotal = True
         Else
-            Control_Total = False
+            ControlTotal = False
         End If
         If Usuario(22) = 1 Then
             Ventas = True
@@ -289,7 +289,7 @@
         End Set
     End Property
 
-    Public Property Control_Total As Boolean
+    Public Property ControlTotal As Boolean
         Get
             Return bControl_Total
         End Get
@@ -367,7 +367,7 @@
         Query = Query & "'" & Me.Provinca & "',"
         Query = Query & "'" & Me.Localidad & "',"
 
-        If Me.Control_Total Then
+        If Me.ControlTotal Then
             Query = Query & "1" & ","
         Else
             Query = Query & "0" & ","
@@ -425,7 +425,7 @@
         Query = Query & "Provincia='" & Me.Provinca & "',"
         Query = Query & "Localidad='" & Me.Localidad & "',"
 
-        If Me.Control_Total Then
+        If Me.ControlTotal Then
             Query = Query & "ControlTotal=1,"
         Else
             Query = Query & "ControlTotal=0,"

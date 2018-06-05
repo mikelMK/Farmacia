@@ -95,7 +95,6 @@ Public Class FmrGestionUsuario
 
 #Region "Otros"
     Private Sub LtsEmpleados_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LtsEmpleados.SelectedIndexChanged
-        Me.ActualizarDatos()
         If LtsEmpleados.SelectedIndex = -1 Then
             EmpleadoMostrado = New Usuario()
         Else
@@ -124,17 +123,16 @@ Public Class FmrGestionUsuario
             DtpNacimiento.Value = EmpleadoMostrado.Fecha_Nac
         End If
         txtIdFarmacia.Text = EmpleadoMostrado.Farmacia
-
         For i = 0 To CboPuesto.Items.Count - 1
-            If CboPuesto.SelectedValue <> EmpleadoMostrado.Puesto Then
-                CboPuesto.SelectedIndex = i
+            CboPuesto.SelectedIndex = i
+            If CboPuesto.SelectedValue = EmpleadoMostrado.Puesto Then
                 i = CboPuesto.Items.Count - 1
             End If
         Next
         SudSalario.Value = EmpleadoMostrado.Salario
         For i = 0 To CboTipoVia.Items.Count - 1
-            If CboPuesto.SelectedValue <> EmpleadoMostrado.TipoVia Then
-                CboPuesto.SelectedIndex = i
+            CboTipoVia.SelectedIndex = i
+            If CboTipoVia.SelectedValue = EmpleadoMostrado.TipoVia Then
                 i = CboTipoVia.Items.Count - 1
             End If
         Next
@@ -148,7 +146,7 @@ Public Class FmrGestionUsuario
         txtProvincia.Text = EmpleadoMostrado.Provinca
         txtLocalidad.Text = EmpleadoMostrado.Localidad
 
-        ChkControlTotal.Checked = EmpleadoMostrado.Control_Total
+        ChkControlTotal.Checked = EmpleadoMostrado.ControlTotal
         ChkVentas.Checked = EmpleadoMostrado.Ventas
         ChkCompras.Checked = EmpleadoMostrado.Compras
         ChkAlmacen.Checked = EmpleadoMostrado.Almacen
@@ -185,7 +183,7 @@ Public Class FmrGestionUsuario
         EmpleadoMostrado.Provinca = txtProvincia.Text
         EmpleadoMostrado.Localidad = txtLocalidad.Text
         'Chex Box
-        EmpleadoMostrado.Control_Total = ChkControlTotal.Checked
+        EmpleadoMostrado.ControlTotal = ChkControlTotal.Checked
         EmpleadoMostrado.Ventas = ChkVentas.Checked
         EmpleadoMostrado.Compras = ChkCompras.Checked
         EmpleadoMostrado.Almacen = ChkAlmacen.Checked
@@ -237,36 +235,67 @@ Public Class FmrGestionUsuario
     End Sub
 
     Private Sub ActualizarDatos()
-        Dim MiTabla As DataTable = MiConexion.Consultar("Select * from Empleados")
-        MisEmpleados.Clear()
-        For Each Mirow As DataRow In MiTabla.Rows
-            MisEmpleados.Add(New Usuario(Mirow))
-        Next
+
+        Dim MiTabla As DataTable
+        'Tipo_Via
         MiTabla = MiConexion.Consultar("Select * from Tipo_Via")
         ListaVias.Clear()
         For Each Mirow As DataRow In MiTabla.Rows
             ListaVias.Add(New TipoVia(Mirow))
         Next
+        CboTipoVia.DataSource = ListaVias
+        'Tipo_Puesto
         MiTabla = MiConexion.Consultar("Select * from Tipo_Puesto")
         ListaPuestos.Clear()
         For Each Mirow As DataRow In MiTabla.Rows
             ListaPuestos.Add(New TipoPuesto(Mirow))
         Next
+        CboPuesto.DataSource = ListaPuestos
+        'Empleados
+        MiTabla = MiConexion.Consultar("Select * from Empleados")
+        MisEmpleados.Clear()
+        For Each Mirow As DataRow In MiTabla.Rows
+            MisEmpleados.Add(New Usuario(Mirow))
+        Next
+        LtsEmpleados.DataSource = MisEmpleados
+
     End Sub
 
     Private Sub CargarListas()
-        Me.ActualizarDatos()
-        LtsEmpleados.DataSource = MisEmpleados
-        LtsEmpleados.DisplayMember = "DNI"
-        LtsEmpleados.SelectedIndex = 0
+        CboPuesto.DisplayMember = "Despcripcion"
+        CboPuesto.ValueMember = "IdPuesto"
 
-        CboTipoVia.DataSource = ListaVias
         CboTipoVia.DisplayMember = "Despcripcion"
         CboTipoVia.ValueMember = "Id"
 
-        CboPuesto.DataSource = ListaPuestos
-        CboPuesto.DisplayMember = "Despcripcion"
-        CboPuesto.ValueMember = "IdPuesto"
+        LtsEmpleados.DisplayMember = "DNI"
+        LtsEmpleados.SelectedIndex = -1
+
+        Me.ActualizarDatos()
+    End Sub
+
+    Private Sub CboPuesto_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboPuesto.SelectedIndexChanged
+        Dim puesto As TipoPuesto = CboPuesto.SelectedItem()
+        ChkControlTotal.Checked = puesto.ControlTotal
+        ChkVentas.Checked = puesto.Ventas
+        ChkCompras.Checked = puesto.Compras
+        ChkAlmacen.Checked = puesto.Almacen
+        ChkUsuarios.Checked = puesto.Usuarios
+
+    End Sub
+
+    Private Sub ChkControlTotal_CheckedChanged(sender As Object, e As EventArgs) Handles ChkControlTotal.CheckedChanged
+        If ChkControlTotal.Checked Then
+            ChkVentas.Checked = True
+            ChkCompras.Checked = True
+            ChkAlmacen.Checked = True
+            ChkUsuarios.Checked = True
+        Else
+            ChkVentas.Checked = False
+            ChkCompras.Checked = False
+            ChkAlmacen.Checked = False
+            ChkUsuarios.Checked = False
+        End If
     End Sub
 #End Region
 End Class
