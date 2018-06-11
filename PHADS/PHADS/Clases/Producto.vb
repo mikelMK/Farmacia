@@ -54,4 +54,28 @@
 
     End Sub
 #End Region
+#Region "Metodos"
+    Public Function SqlInsert() As String
+        Dim Query As String = "INSERT INTO Productos(Nombre,Proveedores,Coste)VALUES('"
+        Query &= Me.Nombre & "',"
+        Query &= Me.Proveedores & ","
+        Query &= Me.Coste & ")"
+        Return Query
+    End Function
+
+    Public Function SqlUpdate() As String
+        Dim Query As String = "UPDATE Productos SET "
+        Query &= "Nombre ='" & Me.Nombre & "',"
+        Query &= "Proveedores = " & Me.Proveedores & ","
+        Query &= "Coste =" & Me.Coste & ","
+        Query &= "WHERE Id_Productos = " & Me.Id_Productos
+
+        Return Query
+    End Function
+
+    Public Function SqlDelete() As String
+        Dim Query As String = "DELETE FROM Productos WHERE Id_Productos = " & Me.Id_Productos
+        Return Query
+    End Function
+#End Region
 End Class
