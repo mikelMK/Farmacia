@@ -74,6 +74,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\Conexion.vb" />
+    <Compile Include="Clases\Producto.vb" />
+    <Compile Include="Clases\Proveedor.vb" />
     <Compile Include="Clases\TipoPuesto.vb" />
     <Compile Include="Clases\TipoVia.vb" />
     <Compile Include="Clases\Usuario.vb" />

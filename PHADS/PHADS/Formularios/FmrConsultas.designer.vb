@@ -452,7 +452,7 @@ Partial Class FmrConsultas
         Me.AcceptButton = Me.BtnSelect
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(887, 746)
+        Me.ClientSize = New System.Drawing.Size(887, 720)
         Me.Controls.Add(Me.GrbSelecCampos)
         Me.Controls.Add(Me.GrbWhere)
         Me.Controls.Add(Me.Label4)

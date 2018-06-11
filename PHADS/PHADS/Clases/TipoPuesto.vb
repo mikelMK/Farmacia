@@ -12,7 +12,7 @@
     ''' <summary>
     ''' Constructo Usuario Con DataRow de Select * from Tipo_Puesto
     ''' </summary>
-    ''' <param name="TipoVia">Datarow de Tipo_Puesto</param>
+    ''' <param name="pTipoPuesto">Datarow de Tipo_Puesto</param>
     Public Sub New(pTipoPuesto As DataRow)
         Me.IdPuesto = pTipoPuesto(0)
         Me.Despcripcion = pTipoPuesto(1)

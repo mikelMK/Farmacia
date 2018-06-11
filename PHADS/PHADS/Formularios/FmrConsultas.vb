@@ -103,30 +103,30 @@ Public Class FmrConsultas
 
         Dim query = TxtSelect.Text
         Dim Selec As Boolean = True
-        'If Not query.ToUpper.IndexOf("INSERT INTO") = -1 Then
-        '    Selec = False
-        'End If
-        'If Not query.ToUpper.IndexOf("DELETE FROM") = -1 Then
-        '    Selec = False
-        'End If
-        'If Not query.ToUpper.IndexOf("UPDATE") = -1 Then
-        '    Selec = False
-        'End If
-        'If Not query.ToUpper.IndexOf("DROP") = -1 Then
-        '    Selec = False
-        'End If
-        'If Not query.ToUpper.IndexOf("ALTER") = -1 Then
-        '    Selec = False
-        'End If
-        'If Not query.ToUpper.IndexOf("CREATE") = -1 Then
-        '    Selec = False
-        'End If
-        'If Not query.ToUpper.IndexOf(";") = -1 Then
-        '    Selec = False
-        'End If
-        'If query.ToUpper.IndexOf("SELECT") = -1 Then
-        '    Selec = False
-        'End If
+        If Not query.ToUpper.IndexOf("INSERT INTO") = -1 Then
+            Selec = False
+        End If
+        If Not query.ToUpper.IndexOf("DELETE FROM") = -1 Then
+            Selec = False
+        End If
+        If Not query.ToUpper.IndexOf("UPDATE") = -1 Then
+            Selec = False
+        End If
+        If Not query.ToUpper.IndexOf("DROP") = -1 Then
+            Selec = False
+        End If
+        If Not query.ToUpper.IndexOf("ALTER") = -1 Then
+            Selec = False
+        End If
+        If Not query.ToUpper.IndexOf("CREATE") = -1 Then
+            Selec = False
+        End If
+        If Not query.ToUpper.IndexOf(";") = -1 Then
+            Selec = False
+        End If
+        If query.ToUpper.IndexOf("SELECT") = -1 Then
+            Selec = False
+        End If
         If Selec Then
             TablaDGW = MiConexion.Consultar(query)
             If Not TablaDGW Is Nothing Then
