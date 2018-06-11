@@ -73,9 +73,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clases\Almacen.vb" />
     <Compile Include="Clases\Conexion.vb" />
     <Compile Include="Clases\Producto.vb" />
     <Compile Include="Clases\Proveedor.vb" />
+    <Compile Include="Clases\Tienda.vb" />
     <Compile Include="Clases\TipoPuesto.vb" />
     <Compile Include="Clases\TipoVia.vb" />
     <Compile Include="Clases\Usuario.vb" />

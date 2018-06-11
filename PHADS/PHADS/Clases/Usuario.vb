@@ -334,6 +334,7 @@
         End Set
     End Property
 #End Region
+
 #Region "Metodos"
     ''' <summary>
     ''' Retorna la SQl para el Insert.
@@ -463,6 +464,4 @@
         Return Query
     End Function
 #End Region
-
-
 End Class
